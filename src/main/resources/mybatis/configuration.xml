@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 여기에 alias 사용하여 parameterType, resultType을 짧게 줄인다.=><typeAlias alias=“PersonVo" type="com.javaex.vo.PersonVo" /> -->
+	</typeAliases>
+	<mappers>
+	<!--  -->
+		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/guest.xml" />
+		<mapper resource="mybatis/mappers/board.xml" />
+		<!-- 여기는 mapper추가하는 자리. mapper이름으로 파일 만들어주기 -->
+	</mappers>
+</configuration>
+
