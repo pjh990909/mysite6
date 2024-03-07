@@ -71,21 +71,27 @@ create  table rboard(
    REFERENCES users(no)
 );
 INSERT INTO rboard
-VALUES (null,'제목', '내용물',111,now(),1,0,0,0);
+VALUES (null,'제에목', '내용물',111,now(),1,3,2,1);
 
 select *
 from rboard;
 
 drop table rboard;
 
-select u.name,
-      b.hit,
-       b.reg_date,
+select b.no,
+	   u.name,
+       b.group_no,
+       b.order_no,
        b.title,
-       b.content
+       b.depth
 from rboard b,users u
 where b.user_no = u.no
-and b.no = 1;
+order by group_no DESC, order_no ASC;
+
+update rboard
+set order_no = order_no+1
+where group_no = 2
+and depth = 1;
 
 create  table board(
    no integer auto_increment primary key,
@@ -99,7 +105,7 @@ create  table board(
 );
 
 INSERT INTO board
-VALUES (null,'제목', '내용물',1412,now(),2);
+VALUES (null,'제목', '내용물',1119,now(),2);
 
 select *
 from board;
@@ -114,3 +120,5 @@ select u.name,
 from board b,users u
 where b.user_no = u.no
 and b.no = 1;
+
+

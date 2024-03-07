@@ -57,33 +57,32 @@
 								<tr>
 									<th>번호</th>
 									<th>제목</th>
-									<th>글쓴이</th>
-									<th>조회수</th>
-									<th>작성일</th>
+									<th>group_no</th>
+									<th>order_no</th>
+									<th>depth</th>
 									<th>관리</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td class="text-left"><a href="">111111</a></td>
-									<td>33333</td>
-									<td>44444</td>
-									<td>55555</td>
-									<c:if test="${authUser.no == boardVo.user_no}">
-										<td><a href="">[삭제]</a></td>
-									</c:if>
-								</tr>
+								<c:forEach items="${requestScope.rList}" var="rboardVo">
+									<tr>
+										<td>${rboardVo.no}</td>
+										<td class="text-left"><a href="">${rboardVo.title}</a></td>
+										<td>${rboardVo.group_no}</td>
+										<td>${rboardVo.order_no}</td>
+										<td>${rboardVo.depth}</td>
+										<c:if test="${authUser.no == rboardVo.user_no}">
+											<td><a href="">[삭제]</a></td>
+										</c:if>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 					<!-- //list -->
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> <br> <br> <br>
 					<div id="writeForm2">
-						<form action="${pageContext.request.contextPath}/board/write" method="get">
+						<form action="${pageContext.request.contextPath}/rboard/write" method="get">
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
@@ -93,8 +92,8 @@
 							<div class="form-group">
 								<textarea id="txt-content" name="content"></textarea>
 							</div>
+							
 
-							<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list">취소</a>
 							<button id="btn_add" type="submit">등록</button>
 
 						</form>
