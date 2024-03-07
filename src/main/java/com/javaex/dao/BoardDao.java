@@ -6,28 +6,28 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.javaex.vo.BoardVo;
+import com.javaex.vo.RboardVo;
 
 @Repository
 public class BoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<BoardVo> boardSelect(){
+	public List<RboardVo> boardSelect(){
 		
-		List<BoardVo> boardList = sqlSession.selectList("board.select");
+		List<RboardVo> boardList = sqlSession.selectList("board.select");
 		
 		return boardList;
 	}
 	
-	public BoardVo boardSeletone(int no) {
+	public RboardVo boardSeletone(int no) {
 		
-		BoardVo boardVo = sqlSession.selectOne("board.selectone", no);
+		RboardVo boardVo = sqlSession.selectOne("board.selectone", no);
 		
 		return boardVo;
 	}
 	
-	public int boardUpdate(BoardVo boardVo) {
+	public int boardUpdate(RboardVo boardVo) {
 		
 		int count = sqlSession.update("board.update", boardVo);
 		
@@ -41,7 +41,7 @@ public class BoardDao {
 		return count;
 	}
 	
-	public int boardInsert(BoardVo boardVo) {
+	public int boardInsert(RboardVo boardVo) {
 		
 		int count = sqlSession.insert("board.insert", boardVo);
 		

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
-import com.javaex.vo.BoardVo;
+import com.javaex.vo.RboardVo;
 import com.javaex.vo.UserVo;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ public class BoardController {
 	@RequestMapping(value="/list", method= {RequestMethod.GET, RequestMethod.POST})
 	public String List(Model model) {
 		
-		List<BoardVo> boardList = boardService.exeBoardList();
+		List<RboardVo> boardList = boardService.exeBoardList();
 		
 		model.addAttribute("boardList",boardList);
 		
@@ -37,7 +37,7 @@ public class BoardController {
 	@RequestMapping(value="/read", method= {RequestMethod.GET, RequestMethod.POST})
 	public String Read(@RequestParam int no,Model model) {
 		
-		BoardVo boardVo = boardService.exeBoardRead(no);
+		RboardVo boardVo = boardService.exeBoardRead(no);
 		
 		model.addAttribute(boardVo);
 		
@@ -48,7 +48,7 @@ public class BoardController {
 	@RequestMapping(value="/mform", method= {RequestMethod.GET, RequestMethod.POST})
 	public String modifyForm(@RequestParam int no,Model model) {
 		
-		BoardVo boardVo = boardService.exeBoardRead(no);
+		RboardVo boardVo = boardService.exeBoardRead(no);
 		
 		model.addAttribute(boardVo);
 		
@@ -58,7 +58,7 @@ public class BoardController {
 	
 	//수정
 	@RequestMapping(value="/modify", method= {RequestMethod.GET, RequestMethod.POST})
-	public String modify(@ModelAttribute BoardVo boardVo) {
+	public String modify(@ModelAttribute RboardVo boardVo) {
 		
 		boardService.exeBoardModify(boardVo);
 		
@@ -83,7 +83,7 @@ public class BoardController {
 	
 	//등록
 	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
-	public String write(HttpSession session,@ModelAttribute BoardVo boardVo) {
+	public String write(HttpSession session,@ModelAttribute RboardVo boardVo) {
 		
 		
 		UserVo userVo = (UserVo)session.getAttribute("authUser");
@@ -96,4 +96,5 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
 }

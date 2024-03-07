@@ -6,28 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaex.dao.BoardDao;
-import com.javaex.vo.BoardVo;
+import com.javaex.vo.RboardVo;
 
 @Service
 public class BoardService {
 	@Autowired
 	private BoardDao boardDao;
 	
-	public List<BoardVo> exeBoardList(){
+	public List<RboardVo> exeBoardList(){
 		
-		List<BoardVo> boardList = boardDao.boardSelect();
+		List<RboardVo> boardList = boardDao.boardSelect();
 		
 		return boardList;
 	}
 	
-	public BoardVo exeBoardRead(int no) {
+	public RboardVo exeBoardRead(int no) {
 		
-		BoardVo boardVo = boardDao.boardSeletone(no);
+		RboardVo boardVo = boardDao.boardSeletone(no);
 		
 		return boardVo;
 	}
 	
-	public int exeBoardModify(BoardVo boardVo) {
+	public int exeBoardModify(RboardVo boardVo) {
 		
 		int count = boardDao.boardUpdate(boardVo);
 		
@@ -41,7 +41,7 @@ public class BoardService {
 		return count;
 	}
 	
-	public int exeBoardwrite(BoardVo boardVo) {
+	public int exeBoardwrite(RboardVo boardVo) {
 		
 		int count = boardDao.boardInsert(boardVo);
 		

@@ -1,6 +1,6 @@
 package com.javaex.vo;
 
-public class BoardVo {
+public class RboardVo {
 
 	private int no;
 	private String title;
@@ -9,11 +9,15 @@ public class BoardVo {
 	private String reg_date;
 	private int user_no;
 	private String name;
-	
-	public BoardVo() {
+	private int group_no;
+	private int order_no;
+	private int depth;
+
+	public RboardVo() {
 	}
 
-	public BoardVo(int no, String title, String content, int hit, String reg_date, int user_no, String name) {
+	public RboardVo(int no, String title, String content, int hit, String reg_date, int user_no, String name,
+			int group_no, int order_no, int depth) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
@@ -21,6 +25,9 @@ public class BoardVo {
 		this.reg_date = reg_date;
 		this.user_no = user_no;
 		this.name = name;
+		this.group_no = group_no;
+		this.order_no = order_no;
+		this.depth = depth;
 	}
 
 	public int getNo() {
@@ -79,12 +86,35 @@ public class BoardVo {
 		this.name = name;
 	}
 
+	public int getGroup_no() {
+		return group_no;
+	}
+
+	public void setGroup_no(int group_no) {
+		this.group_no = group_no;
+	}
+
+	public int getOrder_no() {
+		return order_no;
+	}
+
+	public void setOrder_no(int order_no) {
+		this.order_no = order_no;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", reg_date="
-				+ reg_date + ", user_no=" + user_no + ", name=" + name + "]";
+				+ reg_date + ", user_no=" + user_no + ", name=" + name + ", group_no=" + group_no + ", order_no="
+				+ order_no + ", depth=" + depth + "]";
 	}
-	
-	
-	
+
 }
