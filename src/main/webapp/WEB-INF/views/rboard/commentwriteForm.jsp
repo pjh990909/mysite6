@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -43,70 +43,33 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-
+	
 				<div id="board">
-					<div id="list">
-						<form action="" method="get">
-							<div class="form-group text-right">
-								<input type="text">
-								<button type="submit" id=btn_search>검색</button>
-							</div>
-						</form>
-						<table>
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>group_no</th>
-									<th>order_no</th>
-									<th>depth</th>
-									<th>관리</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${requestScope.rList}" var="rboardVo">
-									<tr>
-										<td>${rboardVo.no}</td>
-										<td class="text-left"><a href="">${rboardVo.title}</a></td>
-										<td>${rboardVo.group_no}</td>
-										<td>${rboardVo.order_no}</td>
-										<td>${rboardVo.depth}</td>
-										<td><a href="${pageContext.request.contextPath}/rboard/commentform">[작성]</a></td>
-										<c:if test="${authUser.no == rboardVo.user_no}">
-											<td><a href="">[삭제]</a></td>
-										</c:if>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<!-- //list -->
-					<br> <br> <br> <br>
-					<div id="writeForm2">
-						<form action="${pageContext.request.contextPath}/rboard/write" method="get">
+					<div id="writeForm">
+						<form action="${pageContext.request.contextPath}/board/write" method="get">
 							<!-- 제목 -->
 							<div class="form-group">
-								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
+								<label class="form-text" for="txt-title">제목</label>
+								<input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
 							</div>
-
+						
 							<!-- 내용 -->
 							<div class="form-group">
 								<textarea id="txt-content" name="content"></textarea>
 							</div>
 							
-
-							<button id="btn_add" type="submit">등록</button>
-
+							<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list">취소</a>
+							<button id="btn_add" type="submit" >등록</button>
+							
 						</form>
 						<!-- //form -->
 					</div>
-
-
-
+					<!-- //writeForm -->
 				</div>
 				<!-- //board -->
 			</div>
 			<!-- //content  -->
+
 
 		</div>
 		<!-- //container  -->
@@ -117,6 +80,7 @@
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->
+
 </body>
 
 </html>
