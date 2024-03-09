@@ -42,7 +42,6 @@ public class RboardController {
 
 		model.addAttribute("rList", rList);
 		
-		
 		return "rboard/commentForm";
 	}
 
@@ -58,7 +57,10 @@ public class RboardController {
 
 		rboardservice.exeInsert(rboardVo);
 
-		return "/redirect:/rboard/commentList";
+		return "redirect:/rboard/commentlist";
 	}
+	
+	//그냥 게시글 등록
+	
 
 }

@@ -70,11 +70,19 @@
 								<c:forEach items="${requestScope.rList}" var="rboardVo">
 									<tr>
 										<td>${rboardVo.no}</td>
+										<c:if test="${rboardVo.depth == 0}">
 										<td class="text-left"><a href="">${rboardVo.title}</a></td>
+										</c:if>
+										<c:if test="${rboardVo.depth == 1}">
+										<td class="text-left"><a href="">&nbsp;&nbsp;&#8627;${rboardVo.title}</a></td>
+										</c:if>
+										<c:if test="${rboardVo.depth == 2}">
+										<td class="text-left"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;&#8627;${rboardVo.title}</a></td>
+										</c:if>
 										<td>${rboardVo.group_no}</td>
 										<td>${rboardVo.order_no}</td>
 										<td>${rboardVo.depth}</td>
-										<td><a href="${pageContext.request.contextPath}/rboard/commentform">[작성]</a></td>
+										<td><a href="${pageContext.request.contextPath}/rboard/commentform?group_no=${rboardVo.group_no}&order_no=${rboardVo.order_no}&depth=${rboardVo.depth}">[작성]</a></td>
 										<c:if test="${authUser.no == rboardVo.user_no}">
 											<td><a href="">[삭제]</a></td>
 										</c:if>

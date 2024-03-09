@@ -60,6 +60,7 @@
 									<th>group_no</th>
 									<th>order_no</th>
 									<th>depth</th>
+									<th>댓글쓰기</th>
 									<th>관리</th>
 								</tr>
 							</thead>
@@ -67,11 +68,19 @@
 								<c:forEach items="${requestScope.rList}" var="rboardVo">
 									<tr>
 										<td>${rboardVo.no}</td>
+										<c:if test="${rboardVo.depth == 0}">
 										<td class="text-left"><a href="">${rboardVo.title}</a></td>
+										</c:if>
+										<c:if test="${rboardVo.depth == 1}">
+										<td class="text-left"><a href="">&nbsp;&nbsp;&#8627;${rboardVo.title}</a></td>
+										</c:if>
+										<c:if test="${rboardVo.depth == 2}">
+										<td class="text-left"><a href="">&nbsp;&nbsp;&nbsp;&nbsp;&#8627;${rboardVo.title}</a></td>
+										</c:if>
 										<td>${rboardVo.group_no}</td>
 										<td>${rboardVo.order_no}</td>
 										<td>${rboardVo.depth}</td>
-										<td><a href="${pageContext.request.contextPath}/rboard/commentform">[작성]</a></td>
+										<td><a href="${pageContext.request.contextPath}/rboard/commentform?group_no=${rboardVo.group_no}&order_no=${rboardVo.order_no}&depth=${rboardVo.depth}">[작성]</a></td>
 										<c:if test="${authUser.no == rboardVo.user_no}">
 											<td><a href="">[삭제]</a></td>
 										</c:if>
@@ -93,7 +102,9 @@
 							<div class="form-group">
 								<textarea id="txt-content" name="content"></textarea>
 							</div>
-							
+							<input type="text" name ="group_no" value="${param.group_no}">
+							<input type="text" name ="order_no" value="${param.order_no}">
+							<input type="text" name ="depth" value="${param.depth}">
 
 							<button id="btn_add" type="submit">등록</button>
 
