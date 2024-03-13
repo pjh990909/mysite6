@@ -67,4 +67,13 @@ public class GuestContoroller {
 
 		return "guestbook/deleteForm";
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	@RequestMapping(value = "/ajaxindex", method = { RequestMethod.GET, RequestMethod.POST })
+	public String ajaxindex() {
+		System.out.println("guestController.ajaxindex()");
+		
+		
+		return "guestbook/ajaxindex";
+	}
 }

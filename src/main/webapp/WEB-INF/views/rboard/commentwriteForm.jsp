@@ -46,7 +46,7 @@
 	
 				<div id="board">
 					<div id="writeForm">
-						<form action="${pageContext.request.contextPath}/board/write" method="get">
+						<form action="${pageContext.request.contextPath}/rboard/write" method="get">
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label>
@@ -58,7 +58,7 @@
 								<textarea id="txt-content" name="content"></textarea>
 							</div>
 							
-							<a id="btn_cancel" href="${pageContext.request.contextPath}/board/list">취소</a>
+							<a id="btn_cancel" href="${pageContext.request.contextPath}/rboard/commentlist">취소</a>
 							<button id="btn_add" type="submit" >등록</button>
 							
 						</form>

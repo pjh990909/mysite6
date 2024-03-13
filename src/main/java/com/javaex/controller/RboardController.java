@@ -46,21 +46,31 @@ public class RboardController {
 	}
 
 	// 댓글 등록
-	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
-	public String write(HttpSession session, @ModelAttribute RboardVo rboardVo) {
-		System.out.println("BoardController.write()");
+	@RequestMapping(value = "/commentwrite", method = { RequestMethod.GET, RequestMethod.POST })
+	public String commentwrite(HttpSession session, @ModelAttribute RboardVo rboardVo) {
+		System.out.println("BoardController.commentwrite()");
 
 		UserVo userVo = (UserVo) session.getAttribute("authUser");
 		int no = userVo.getNo();
 
 		rboardVo.setUser_no(no);
 
-		rboardservice.exeInsert(rboardVo);
+		rboardservice.execommentInsert(rboardVo);
 
 		return "redirect:/rboard/commentlist";
 	}
 	
 	//그냥 게시글 등록
-	
+	@RequestMapping(value = "/write", method = { RequestMethod.GET, RequestMethod.POST })
+	public String write(HttpSession session, @ModelAttribute RboardVo rboardVo) {
+		
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+		int no = userVo.getNo();
+		
+		
+		
+		
+		return"";
+	}
 
 }

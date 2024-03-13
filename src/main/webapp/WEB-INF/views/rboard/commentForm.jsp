@@ -92,7 +92,7 @@
 					<!-- //list -->
 					<br> <br> <br> <br>
 					<div id="writeForm2">
-						<form action="${pageContext.request.contextPath}/rboard/write" method="get">
+						<form action="${pageContext.request.contextPath}/rboard/commentwrite" method="get">
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">

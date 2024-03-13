@@ -21,7 +21,7 @@ public class RboardService {
 		return rList;
 	}
 	
-	public void exeInsert(RboardVo rboardVo) {
+	public void execommentInsert(RboardVo rboardVo) {
 		System.out.println("RboardService.exeInsert()");
 		
 		rboardDao.RboardUpdat(rboardVo);
