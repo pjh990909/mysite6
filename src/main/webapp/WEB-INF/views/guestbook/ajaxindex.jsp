@@ -94,7 +94,8 @@
 							<div class="closeBtn">×</div>
 							<div class="m-header">패스워드를 입력하세요</div>
 							<div class="m-body">
-								<input class="m-no" type="password" name="password" value=""><br> <input class="m-password" type="text" name="no" value="">
+								<input class="m-password" type="password" name="password" value=""><br> 
+								<input class="m-no" type="text" name="no" value="">
 							</div>
 							<div class="m-footer">
 								<button class="btnDelete" type="button">삭제</button>
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	
 	axios({
 	        method: 'post',           // put, post, delete                   
-	        url: '/mysite6/api/guestbooks/delete',
+	        url: '${pageContext.request.contextPath}/api/guestbooks',
 	        headers: {"Content-Type" : "application/json; charset=utf-8"}, //전송타입
 	        params: guestVo,  //get방식 파라미터로 값이 전달
 	        //data: guestbookVo,   //put, post, delete 방식 자동으로 JSON으로 변환 전달
@@ -184,6 +185,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	    .then(function (response) {
 	        console.log(response); //수신데이타
 	        console.log(response.data);
+	        
 	    	let guestbookVo = response.data
 	    	
 	    	//그리기
@@ -231,32 +233,27 @@ document.addEventListener("DOMContentLoaded",function(){
 				no:no,
 				password:password
 		}
-		
+		console.log(password);
 		// 서버로 전송
 		axios({
 	        method: 'post',           // put, post, delete                   
-	        url: '/mysite6/api/guestbooks',
+	        url: '${pageContext.request.contextPath}/api/guestbooks/delete',
 	        headers: {"Content-Type" : "application/json; charset=utf-8"}, //전송타입
-	        //params: guestbookVo,  //get방식 파라미터로 값이 전달
+	        params: guestbookVo,  //get방식 파라미터로 값이 전달
 	        data: guestbookVo,   //put, post, delete 방식 자동으로 JSON으로 변환 전달
 	        responseType: 'json' //수신타입
 	    	})
 		    .then(function (response) {
 		        console.log(response); //수신데이타
-		        console.log(response.data);
-		    	let guestbookVo = response.data
-	    	
-	    		//그리기
-	    		render(guestbookVo);
-	    	
-	    		//폼비우기
-	    		guestForm.reset();
+		        
+		    	del(no);
+	    		
 	    	})
 	    	.catch(function (error) {
 	        console.log(error);
 	 		});
 	
-			console.log(guestVo);
+			
 	
 		
 	});
@@ -302,9 +299,18 @@ function render(guestBookVo,dir) {
 	   console.log("방향체크");
    }
    
-   
-   
-   
+}
+
+//삭제
+function del(no){
+	let tdTag = document.querySelector(".guestRead tr td");
+	
+	if(no == tdTag.textContent){
+		console.log( tdTag.parentElement.parentElement.parentElement);
+		tdTag.parentElement.parentElement.parentElement.remove();
+	
+	}
+	
 }
 
 </script>

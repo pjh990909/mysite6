@@ -59,10 +59,8 @@ public class GuestService {
 		}
 		//ajax삭제
 		public MemberVo exeDelete2(MemberVo memberVo) {
-			System.out.println("PhonebookService.exeDelete()");
+			System.out.println("PhonebookService.exeDelete2()");
 
-			// PhonebookDao phonebookDao = new PhonebookDao();
-			
 			guestDao.guestDelete2(memberVo);
 			
 			MemberVo mVo = guestDao.guestbookSelectOne(memberVo.getNo());

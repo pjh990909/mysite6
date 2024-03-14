@@ -54,7 +54,7 @@ public class GuestDao {
 		System.out.println("GuestDao.guestbookSelectOne()");
 
 		MemberVo memberVo = sqlSession.selectOne("guest.selectOne", no);
-		System.out.println(memberVo);
+		
 
 		return memberVo;
 	}
