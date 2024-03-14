@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,5 +27,27 @@ public class ApiGuestbookController {
 		System.out.println(memberList);
 		
 		return memberList;
+	}
+	
+	//등록
+	@ResponseBody
+	@RequestMapping(value="/api/guestbooks", method = RequestMethod.POST)
+	public MemberVo add(@ModelAttribute MemberVo memberVo) {
+		System.out.println("ApiGuestbookController.add()");
+		System.out.println(memberVo);
+		
+		MemberVo mVo = guestService.exeAddandGuest(memberVo);
+		System.out.println(mVo);
+		
+		return mVo;
+	}
+	//삭제
+	@ResponseBody
+	@RequestMapping(value="/api/guestbooks/delete", method = RequestMethod.POST)
+	public MemberVo delete(@ModelAttribute MemberVo memberVo) {
+		
+		MemberVo mVo = guestService.exeDelete2(memberVo);
+		
+		return mVo;
 	}
 }
