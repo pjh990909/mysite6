@@ -10,6 +10,7 @@
 		<mapper resource="mybatis/mappers/guest.xml" />
 		<mapper resource="mybatis/mappers/board.xml" />
 		<mapper resource="mybatis/mappers/rboard.xml" />
+		<mapper resource="mybatis/mappers/gallery.xml" />
 		<!-- 여기는 mapper추가하는 자리. mapper이름으로 파일 만들어주기 -->
 	</mappers>
 </configuration>

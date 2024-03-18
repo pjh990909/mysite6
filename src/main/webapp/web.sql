@@ -57,6 +57,8 @@ from member;
 delete from member 
 where no = '5';
 
+drop table member;
+
 create  table rboard(
    no integer auto_increment primary key,
     title varchar(500) not null,
@@ -71,7 +73,7 @@ create  table rboard(
    REFERENCES users(no)
 );
 INSERT INTO rboard
-VALUES (null,'제에목', '내용물',111,now(),1,3,2,1);
+VALUES (null,'제에목', '내용물',111,now(),2,4,1,0);
 
 select *
 from rboard;
@@ -94,7 +96,7 @@ where group_no = 2
 and depth = 1;
 
 create  table board(
-   no integer auto_increment primary key,
+    no integer auto_increment primary key,
     title varchar(500) not null,
     content varchar(4000),
     hit integer,
@@ -121,4 +123,26 @@ from board b,users u
 where b.user_no = u.no
 and b.no = 1;
 
+create  table gallery(
+    no integer auto_increment primary key,
+    user_no INTEGER,
+    content varchar(1000) ,
+    filePath varchar(500),
+    orgName varchar(200),
+    saveName varchar(500),
+    fileSize integer,
+    CONSTRAINT no FOREIGN KEY (user_no)
+   REFERENCES users(no)
+);
 
+INSERT INTO gallery
+VALUES (null,1, '내용물','111','312ad','2',4);
+
+
+select u.name,
+       g.filePath,
+       g.orgName,
+       g.saveName,
+       g.fileSize
+from gallery g,users u
+where g.user_no = u.no;
