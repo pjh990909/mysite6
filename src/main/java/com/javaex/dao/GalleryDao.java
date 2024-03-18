@@ -22,13 +22,12 @@ public class GalleryDao {
 		return galleryList;
 	}
 	//등록
-	public int galleryInsert(GalleryVo galleryVo) {
-		
-		int count = sqlSeesion.insert("gallery.insert", galleryVo);
-		
+	public void galleryInsert(GalleryVo galleryVo) {
+		System.out.println("GalleryDao.galleryInsert()");
 		
 		
-		return count;
+		sqlSeesion.insert("gallery.insert", galleryVo);
+		
 	}
 	
 	

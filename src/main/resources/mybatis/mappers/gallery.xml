@@ -7,7 +7,7 @@
 	<insert id="insert" parameterType="com.javaex.vo.GalleryVo">
 		<![CDATA[
 			INSERT INTO gallery
-			VALUES (null,${user_no},${content},${filePath},${orgName},${saveName},${fileSize});
+			VALUES (null,#{user_no},#{content},#{filePath},#{orgName},#{saveName},#{fileSize});
 		]]>
 	</insert>
 	

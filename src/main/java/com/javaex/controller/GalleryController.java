@@ -17,44 +17,42 @@ import com.javaex.vo.UserVo;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class GalleryController {
 
 	@Autowired
 	private GalleryService galleryService;
-	
-	//갤러리 홈,리스트
-	@RequestMapping(value = "/gallery/list", method= {RequestMethod.GET, RequestMethod.POST})
+
+	// 갤러리 홈,리스트
+	@RequestMapping(value = "/gallery/list", method = { RequestMethod.GET, RequestMethod.POST })
 	public String list(Model model) {
 		System.out.println("GalleryController.list()");
-		
+
 		List<GalleryVo> galleryList = galleryService.exelist();
-		
-		model.addAttribute("gList",galleryList);
-		
+
+		model.addAttribute("gList", galleryList);
+
 		return "gallery/list";
 	}
-	
-	//이미지경로등록
-	@RequestMapping(value="/gallery/upload", method = RequestMethod.POST)
-	public String Upload(@RequestParam(value="file") MultipartFile file ,@ModelAttribute GalleryVo galleryVo,HttpSession session) {
+
+	// 이미지경로등록
+	@RequestMapping(value = "/gallery/upload", method = RequestMethod.POST)
+	public String Upload(@RequestParam(value = "file") MultipartFile file, @ModelAttribute GalleryVo galleryVo,
+						 HttpSession session, @RequestParam(value = "content") String content,
+						 @RequestParam(value = "userNo") int userNo, Model model) {
 		System.out.println("AttachController.Upload()");
-		
-		UserVo userVo = (UserVo)session.getAttribute("authUser");
-		
+
+		UserVo userVo = (UserVo) session.getAttribute("authUser");
+
 		int no = userVo.getNo();
-		
+
 		galleryVo.setUser_no(no);
-		
-		
-		
-		galleryService.exeupload(galleryVo, file);
-		
+
+		String saveName = galleryService.exeupload(file, content, userNo);
+		model.addAttribute("saveName", saveName);
+
 		return "redirect:/gallery/list";
-		
+
 	}
-	
-	
-	
+
 }

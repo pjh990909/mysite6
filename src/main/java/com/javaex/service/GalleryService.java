@@ -32,7 +32,7 @@ public class GalleryService {
 	
 	
 	//이미지경로 등록
-	public int exeupload(GalleryVo galleryVo, MultipartFile file) {
+	public String exeupload(MultipartFile file, String content, int userNo) {
 	    System.out.println("GalleryService.exeupload()");
 	    System.out.println(file.getOriginalFilename());
 	    
@@ -63,10 +63,10 @@ public class GalleryService {
 	    
 	    // (1) 파일정보를 DB에 저장
 	    // * vo 묶어주고
-	    GalleryVo newGalleryVo = new GalleryVo(filePath, orgName, saveName, fileSize);
+	    GalleryVo galleryVo = new GalleryVo(userNo, content, filePath, orgName, saveName, fileSize);
 	    
 	    // * db에 저장
-	    int count = galleryDao.galleryInsert(newGalleryVo);
+	    galleryDao.galleryInsert(galleryVo);
 	    System.out.println(".......DB저장완료");
 	    
 	    // (2) 파일을 하드디스크에 저장
@@ -84,7 +84,12 @@ public class GalleryService {
 	        e.printStackTrace();
 	    }
 	    
-	    return count;
+	    return saveName;
 	}
+
+
+
+
+	
 	
 }

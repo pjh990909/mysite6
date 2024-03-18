@@ -14,13 +14,19 @@ public class GalleryVo {
 	public GalleryVo() {
 	}
 
-	public GalleryVo(String filePath, String orgName, String saveName, long fileSize) {
-		super();
+	
+
+	public GalleryVo(int user_no, String content, String filePath, String orgName, String saveName, long fileSize) {
+		this.user_no = user_no;
+		this.content = content;
 		this.filePath = filePath;
 		this.orgName = orgName;
 		this.saveName = saveName;
 		this.fileSize = fileSize;
+		
 	}
+
+
 
 	public GalleryVo(int no, int user_no, String content, String filePath, String orgName, String saveName,
 			long fileSize, String name) {
