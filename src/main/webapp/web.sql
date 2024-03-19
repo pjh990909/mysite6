@@ -138,6 +138,10 @@ create  table gallery(
 INSERT INTO gallery
 VALUES (null,1, '내용물','111','312ad','2',4);
 
+select *
+from gallery;
+
+drop table gallery;
 
 select u.name,
        g.filePath,

@@ -11,6 +11,17 @@
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
 
+<style>
+	.v-on{
+		visibility: visible;
+	}
+	
+	.v-off{
+		visibility: hidden;
+	}
+
+</style>
+
 </head>
 
 
@@ -48,20 +59,21 @@
 
 				<div id="gallery">
 					<div id="list">
-
-						<c:if test="${ !(empty sessionScope.authUser) }">
-							<button id="btnImgUpload" type="button">이미지올리기</button>
+						
+						<c:if test="${!(empty sessionScope.authUser.no)}">
+							<button  id="btnImgUpload" class="v-on" type="button">이미지올리기</button>
 						</c:if>
 						<div class="clear"></div>
-
+					
 
 						<ul id="viewArea">
 
 							<!-- 이미지반복영역 -->
-							<c:forEach items="${requestScope.gList}" var="galleryVo">
+							<c:forEach items="${requestScope.gList}" var="galleryVo" varStatus="status">
 								<li>
 									<div class="view">
-										<img class="imgItem" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}">
+										<img class="imgItem" data-no="${galleryVo.no}" data-savename="${galleryVo.saveName}" data-content="${galleryVo.content}"
+											data-user_no="${galleryVo.user_no}" src="${pageContext.request.contextPath}/upload/${galleryVo.saveName}">
 										<div class="imgWriter">
 											작성자: <strong>${galleryVo.name}</strong>
 										</div>
@@ -120,6 +132,7 @@
 				<div>
 					<img id="viewModelImg" src="">
 					<!-- ajax로 처리 : 이미지출력 위치-->
+					<br> <input class="m-no" type="text" name="no" value="">
 				</div>
 				<div>
 					<p id="viewModelContent"></p>
@@ -134,28 +147,27 @@
 
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function() {
-
+		
 		//등록모델창 호출버튼을 클릭했을때
-		let btnImgUpload = document.querySelector("#btnImgUpload");
-		btnImgUpload.addEventListener("click", calluploadModal);
+		let authNo = "${sessionScope.authUser.no}";
+		if(authNo != ""){
+			let btnImgUpload = document.querySelector("#btnImgUpload");
+			btnImgUpload.addEventListener("click", calluploadModal);
+		}
+		
 
 		//등록모달창 닫기 버튼 (x) 클릭했을때
 		let closeBtn = document.querySelector("#addModal .closeBtn");
-		closeBtn.addEventListener("click",closeuploadModal);
-		
-		
+		closeBtn.addEventListener("click", closeuploadModal);
+
 		//보기 및 삭제 모델창 호출버튼을 클릭했을때
-		let viewArea = document.querySelector("#viewArea");
-		viewArea.addEventListener("click", calldeleteModal);
+		let list = document.querySelector("#list .imgItem");
+		list.addEventListener("click", calldeleteModal);
 
 		//보기 및 삭제 모달창 닫기 버튼 (x) 클릭했을때
 		let closeBtn2 = document.querySelector("#viewModal .closeBtn");
-		closeBtn2.addEventListener("click",closedeleteModal);
-		
-		
-		
-		
-		
+		closeBtn2.addEventListener("click", closedeleteModal);
+
 		////////////함수들//////////////////
 
 		//등록모델창 호출버튼을 클릭했을때
@@ -171,21 +183,23 @@
 			let addModal = document.querySelector("#addModal");
 			addModal.style.display = "none";
 		}
-		
-		//보기 및 삭제 모델창 호출버튼을 클릭했을때
-		function calldeleteModal() {
 
-			if(event.target.tagName == "IMG"){
-				//console.log("모달창 보이기");
-				
-				let viewModal = document.querySelector("#viewModal");
-				viewModal.style.display = "block";
-				
-				
-				let noTag = document.querySelector('[name="no"]');
-				noTag.value = event.target.dataset.no
-				
-			}
+		//보기 및 삭제 모델창 호출버튼을 클릭했을때
+		function calldeleteModal(event) {
+			console.log("sad");
+			
+			let viewModal = document.querySelector("#viewModal");
+			viewModal.style.display = "block";
+
+			let noTag = document.querySelector('[name="no"]');
+			noTag.value = event.target.dataset.no
+
+			let imgTag = document.querySelector("#viewModelImg");
+			imgTag.src = "${pageContext.request.contextPath}/upload/"
+					+ event.target.dataset.savename;
+
+			let contentTag = document.querySelector("#viewModelContent");
+			contentTag.textContent = event.target.dataset.content;
 
 		}
 
@@ -194,7 +208,7 @@
 			let viewModal = document.querySelector("#viewModal");
 			viewModal.style.display = "none";
 		}
-		
+
 	})
 </script>
 

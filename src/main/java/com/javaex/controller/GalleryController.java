@@ -29,7 +29,8 @@ public class GalleryController {
 		System.out.println("GalleryController.list()");
 
 		List<GalleryVo> galleryList = galleryService.exelist();
-
+		System.out.println(galleryList);
+		
 		model.addAttribute("gList", galleryList);
 
 		return "gallery/list";

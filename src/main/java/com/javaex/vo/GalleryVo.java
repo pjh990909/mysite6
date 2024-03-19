@@ -23,7 +23,7 @@ public class GalleryVo {
 		this.orgName = orgName;
 		this.saveName = saveName;
 		this.fileSize = fileSize;
-		
+		    
 	}
 
 
