@@ -11,39 +11,6 @@
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
 
-<style>
-/* 모달창 배경 회색부분*/
-.modal {
-	width: 100%; /* 가로전체 */
-	height: 100%; /* 세로전체 */
-	display: none; /* 시작할때 숨김처리 */
-	position: fixed; /* 화면에 고정 */
-	left: 0; /* 왼쪽에서 0에서 시작 */
-	top: 0; /* 위쪽에서 0에서 시작 */
-	z-index: 999; /* 제일 위에서 */
-	overflow: auto; /* 내용이 많으면 스크롤 생김*/
-	background-color: rgba(0, 0, 0, 0.4); /* 배경이 검정색에 반투명 */
-}
-/* 모달창 내용 흰색부분*/
-.modal .modal-content {
-	width: 600px;
-	margin: 100px auto; /* 상하 100px, 좌우 가운데 */
-	padding: 0px 20px 20px 20px; /* 안쪽 여백 */
-	background-color: #ffffff; /* 배경색 흰색 */
-	border: 1px solid #888888; /*테두리 모양 색 */
-}
-/*모달창 닫기버튼*/
-.modal .modal-content .closeBtn {
-	text-align: right;
-	color: #aaaaaa;
-	font-size: 28px;
-	font-weight: bold;
-	cursor: pointer;
-}
-</style>
-
-
-
 </head>
 
 
@@ -168,30 +135,66 @@
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function() {
 
-		//모델창 호출버튼을 클릭했을때
+		//등록모델창 호출버튼을 클릭했을때
 		let btnImgUpload = document.querySelector("#btnImgUpload");
-		btnImgUpload.addEventListener("click", callModal);
+		btnImgUpload.addEventListener("click", calluploadModal);
 
-		//모달창 닫기 버튼 (x) 클릭했을때
+		//등록모달창 닫기 버튼 (x) 클릭했을때
 		let closeBtn = document.querySelector("#addModal .closeBtn");
-		closeBtn.addEventListener("click",closeModal);
+		closeBtn.addEventListener("click",closeuploadModal);
+		
+		
+		//보기 및 삭제 모델창 호출버튼을 클릭했을때
+		let viewArea = document.querySelector("#viewArea");
+		viewArea.addEventListener("click", calldeleteModal);
+
+		//보기 및 삭제 모달창 닫기 버튼 (x) 클릭했을때
+		let closeBtn2 = document.querySelector("#viewModal .closeBtn");
+		closeBtn2.addEventListener("click",closedeleteModal);
+		
+		
+		
 		
 		
 		////////////함수들//////////////////
 
-		//모델창 호출버튼을 클릭했을때
-		function callModal() {
+		//등록모델창 호출버튼을 클릭했을때
+		function calluploadModal() {
 
 			let addModal = document.querySelector("#addModal");
 			addModal.style.display = "block";
 
 		}
 
-		//모달창 닫기 버튼 (x) 클릭했을때
-		function closeModal() {
+		//등록모달창 닫기 버튼 (x) 클릭했을때
+		function closeuploadModal() {
 			let addModal = document.querySelector("#addModal");
 			addModal.style.display = "none";
 		}
+		
+		//보기 및 삭제 모델창 호출버튼을 클릭했을때
+		function calldeleteModal() {
+
+			if(event.target.tagName == "IMG"){
+				//console.log("모달창 보이기");
+				
+				let viewModal = document.querySelector("#viewModal");
+				viewModal.style.display = "block";
+				
+				
+				let noTag = document.querySelector('[name="no"]');
+				noTag.value = event.target.dataset.no
+				
+			}
+
+		}
+
+		//보기 및 삭제 모달창 닫기 버튼 (x) 클릭했을때
+		function closedeleteModal() {
+			let viewModal = document.querySelector("#viewModal");
+			viewModal.style.display = "none";
+		}
+		
 	})
 </script>
 
