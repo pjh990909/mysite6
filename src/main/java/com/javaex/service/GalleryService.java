@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.GalleryDao;
 import com.javaex.vo.GalleryVo;
-import com.javaex.vo.MemberVo;
 
 @Service
 public class GalleryService {
