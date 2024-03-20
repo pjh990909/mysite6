@@ -44,7 +44,7 @@
 	<delete id="delete" parameterType="com.javaex.vo.MemberVo">
 		<![CDATA[
 			delete from member 
-			where no = #{no} and password = #{password};
+			where no = #{no} and password = #{password}
 		]]>
 	</delete>
 	

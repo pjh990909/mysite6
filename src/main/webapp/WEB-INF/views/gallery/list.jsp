@@ -11,17 +11,6 @@
 <link href="${pageContext.request.contextPath }/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
 
-<style>
-	.v-on{
-		visibility: visible;
-	}
-	
-	.v-off{
-		visibility: hidden;
-	}
-
-</style>
-
 </head>
 
 
@@ -59,12 +48,12 @@
 
 				<div id="gallery">
 					<div id="list">
-						
+
 						<c:if test="${!(empty sessionScope.authUser.no)}">
-							<button  id="btnImgUpload" class="v-on" type="button">이미지올리기</button>
+							<button id="btnImgUpload" class="v-on" type="button">이미지올리기</button>
 						</c:if>
 						<div class="clear"></div>
-					
+
 
 						<ul id="viewArea">
 
@@ -139,7 +128,7 @@
 				</div>
 			</div>
 			<div class="m-footer">
-				<button>삭제</button>
+				<button id="btnDelete" type="button">삭제</button>
 			</div>
 		</div>
 	</div>
@@ -161,13 +150,16 @@
 		closeBtn.addEventListener("click", closeuploadModal);
 
 		//보기 및 삭제 모델창 호출버튼을 클릭했을때
-		let list = document.querySelector("#list .imgItem");
+		let list = document.querySelector("#list");
 		list.addEventListener("click", calldeleteModal);
 
 		//보기 및 삭제 모달창 닫기 버튼 (x) 클릭했을때
 		let closeBtn2 = document.querySelector("#viewModal .closeBtn");
 		closeBtn2.addEventListener("click", closedeleteModal);
 
+		//모달창에 삭제버튼을 클릭했을때 (진짜삭제)
+		let btmDelete = document.querySelector('#btnDelete');
+		btmDelete.addEventListener("click",DeleteAndRemove);
 		////////////함수들//////////////////
 
 		//등록모델창 호출버튼을 클릭했을때
@@ -184,9 +176,9 @@
 			addModal.style.display = "none";
 		}
 
+		
 		//보기 및 삭제 모델창 호출버튼을 클릭했을때
 		function calldeleteModal(event) {
-			console.log("sad");
 			
 			let viewModal = document.querySelector("#viewModal");
 			viewModal.style.display = "block";
@@ -208,7 +200,47 @@
 			let viewModal = document.querySelector("#viewModal");
 			viewModal.style.display = "none";
 		}
-
+		//모달창에 삭제버튼을 클릭했을때 (진짜삭제)
+		function DeleteAndRemove(){
+			let modal = document.querySelector("#viewModal");
+			modal.style.display = "none";
+			
+			let no = document.querySelector('.m-no').value;
+			
+			//데이타모으고
+			let galleryVo = {
+					no:no
+			}
+			
+			// 서버로 전송
+			axios({
+		        method: 'delete',           // put, post, delete                   
+		        url: '${pageContext.request.contextPath}/api/gallery/'+no,
+		        //url: '${pageContext.request.contextPath}/api/guestbooks/delete',//과제로 할때 쓴거
+		        headers: {"Content-Type" : "application/json; charset=utf-8"}, //전송타입
+		        params: galleryVo,  //get방식 파라미터로 값이 전달
+		        //data: galleryVo,  //put, post, delete 방식 자동으로 JSON으로 변환 전달
+		        responseType: 'json' //수신타입
+		    	})
+			    .then(function (response) {
+			        console.log(response); //수신데이타
+			        console.log(response.data);
+			    	
+			        if(response.data == 1){
+				        let num = no;
+				        console.log(num);
+				        let removeImg = document.querySelector(num);
+				        console.log(removeImg);
+				        
+				        removeImg.remove();
+			        }
+			        
+		    		
+		    	})
+		    	.catch(function (error) {
+		        console.log(error);
+		 		});
+		}
 	})
 </script>
 

@@ -26,7 +26,13 @@
 			where g.user_no = u.no
 		]]>
 	</select>
-	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="com.javaex.vo.GalleryVo">
+		<![CDATA[
+			delete from gallery 
+			where no = #{no}
+		]]>
+	</delete>
 	
 	
 </mapper>

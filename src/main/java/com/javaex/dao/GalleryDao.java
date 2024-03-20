@@ -7,16 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.GalleryVo;
+import com.javaex.vo.MemberVo;
 
 @Repository
 public class GalleryDao {
 	@Autowired
-	private SqlSession sqlSeesion;
+	private SqlSession sqlSession;
 	//리스트,홈
 	public List<GalleryVo> galleryList() {
 		System.out.println("GalleryDao.galleryList()");
 		
-		List<GalleryVo> galleryList = sqlSeesion.selectList("gallery.select");
+		List<GalleryVo> galleryList = sqlSession.selectList("gallery.select");
 		
 		
 		return galleryList;
@@ -26,10 +27,14 @@ public class GalleryDao {
 		System.out.println("GalleryDao.galleryInsert()");
 		
 		
-		sqlSeesion.insert("gallery.insert", galleryVo);
+		sqlSession.insert("gallery.insert", galleryVo);
 		
 	}
 	
-	
+	public int galleryDelete(GalleryVo galleryVo) {
+
+		int count = sqlSession.delete("gallery.delete", galleryVo);
+		return count;
+	}
 	
 }

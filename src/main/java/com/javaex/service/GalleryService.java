@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.GalleryDao;
 import com.javaex.vo.GalleryVo;
+import com.javaex.vo.MemberVo;
 
 @Service
 public class GalleryService {
@@ -87,8 +88,15 @@ public class GalleryService {
 	    return saveName;
 	}
 
+	public int exeDelete(GalleryVo galleryVo) {
+		System.out.println("GalleryService.exeDelete()");
 
+		// PhonebookDao phonebookDao = new PhonebookDao();
 
+		int count = galleryDao.galleryDelete(galleryVo);
+
+		return count;
+	}
 
 	
 	
