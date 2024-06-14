@@ -49,7 +49,7 @@ public class AttachService {
 		AttachVo attachVo = new AttachVo(orgName,saveName,filePath,fileSize);
 		System.out.println(attachVo);
 		//*db에 저장
-		System.out.println(".......DB저장롼료");
+		System.out.println(".......DB저장완료");
 		
 		//(2)파일을 하드디스크에 저장
 		

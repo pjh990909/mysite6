@@ -31,6 +31,8 @@ select id,
 from users
 where no = '1';
 
+drop table users;
+
 create table member(
 no int auto_increment primary key,
 name varchar(80),
